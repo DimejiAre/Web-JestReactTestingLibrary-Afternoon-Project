@@ -11,9 +11,9 @@ beforeEach(() => {
 });
 
 describe('Counter component', () => {
-  it('can debug the output', () => {
-    tools.debug();
-  });
+  // it('can debug the output', () => {
+  //   tools.debug();
+  // });
 
   it('shows the correct user', () => {
     const elementWithJoshText = tools.queryByText(/peter/i);
@@ -38,10 +38,18 @@ describe('Counter component', () => {
   });
 
   it('can decrement the count by one by clicking decrement', () => {
-    // implement
+    const decButton = tools.queryByTestId('decButton');
+
+    rtl.fireEvent.click(decButton);
+    expect(tools.queryByText(/0/)).not.toBeInTheDocument();
+    expect(tools.queryByText(/-1/)).toBeInTheDocument();
+
+    rtl.fireEvent.click(decButton);
+    expect(tools.queryByText(/-1/)).not.toBeInTheDocument();
+    expect(tools.queryByText(/-2/)).toBeInTheDocument();
   });
 
-  it('can reset the count clicking rest', () => {
+  it('can reset the count clicking reset', () => {
     // implement
   });
 
